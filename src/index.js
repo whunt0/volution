@@ -1,22 +1,38 @@
 "use strict";
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import App from './App';
-import _ from "lodash";
+import { PlanetWidgetReducer }  from './reducers/planet';
+import { combinedWidgetReducer }  from './reducers/planet';
+
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+
+//function setInput(previousState, action){
+//    if(action.type == "setInputText")
+//        return Object.assign(previousState, action.text);
+//    return previousState;
+//}
 
 let storeDefaults = {
-    items : [],
-    user : {},
-    session : {}
+    PlanetWidget : {
+        PlanetInputs : {},
+        SelectedTransport : null,
+        //Data : {
+        //    Planet : {},
+        //    Transport : {}
+        //}
+    }
 };
 
+
 let store = createStore(
-    changeState, 
+    //PlanetWidgetReducer, 
+    combinedWidgetReducer,
     storeDefaults,
     compose(
         applyMiddleware(thunk),
@@ -24,34 +40,14 @@ let store = createStore(
     )
 );
 
-function bid(state=[], action){
-    switch (action.type){
-    case "ADD_ITEM":
-        var newState = _.extend(state, action.item);
-        return newState;
-    }
-}
-
-store.dispatch({
-    type : "ADD_ITEM",
-    item : {
-        "Title" : "Rusty Lamp",
-        "bid" : 100.30
-    }
-});
-
 ReactDOM.render(
     <Provider store={store}>
-        <HashRouter>
-            <div>
-                <NavbarHeader/>
-                <Route path='/' component={App}/>
-                <Route path='/NewItem' component={NewItem}/>
-            </div>
-        </HashRouter>
+        <div>
+            <App/>
+        </div>
     </Provider>,
     document.getElementById('root')
 );
 
 
-
+export { store };

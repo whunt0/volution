@@ -1,15 +1,14 @@
 "use strict";
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-//import Footer from './Footer'
-//import AddTodo from '../containers/AddTodo'
-//import VisibleTodoList from '../containers/VisibleTodoList'
+import { ItemList, ConnectedPlanetInput } from './components/input';
 
 const App = () => (
     <div>
-        Hello world
-        <Link to={'/TestLink'}>TestLink!</Link>
+        Left Input
+        <ConnectedPlanetInput inputName='LeftInput'/>
+        Right Input
+        <ConnectedPlanetInput inputName='RightInput'/>
     </div>
 );
 
