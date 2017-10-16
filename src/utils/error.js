@@ -1,3 +1,8 @@
+/*
+ * @purpose : Simple error component that displayed passed messages.
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
 'use strict';
 
 import React from "react";

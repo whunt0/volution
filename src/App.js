@@ -1,5 +1,11 @@
+/*
+ * @purpose : Main application, all components are wrapped in a ConnectedPlanetContainer.
+ * ConnectedPlanetContainer handles logic
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
+
 "use strict";
-console.log("ENTERING APP");
 
 import React from 'react';
 import css from './styles/global.css';

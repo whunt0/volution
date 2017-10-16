@@ -1,3 +1,8 @@
+/*
+ * @purpose : Planet Clicker Component handles user clicks on the solar system image
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
 "use strict";
 
 import React from 'react';

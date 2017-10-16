@@ -1,4 +1,10 @@
-console.log("ENTERING CONTAINER/PLANET");
+/*
+ * @purpose : Planet Output Component handles the time display for traveling between planets.
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
+
+"use strict";
 
 import React from 'react';
 import CO from "co";
@@ -21,9 +27,9 @@ class PlanetOutput extends React.Component{
     constructor(props){
         super(props);
         //Keep selected planets inside the planet container, doesn't need to persist in the store.
-        this.state = {};
-        this.state.SelectedPlanets = [];
-        this.state.SelectedTransportation = "";
+        //this.state = {};
+        //this.state.SelectedPlanets = [];
+        //this.state.SelectedTransportation = "";
     }
 
     render(){

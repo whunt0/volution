@@ -1,5 +1,5 @@
 /*
- * @purpose : Planet reducers which keep track of input and vehicle selection
+ * @purpose : Planet reducers which fetch server data, handle planet selection, and handle transportation selection. 
  * @author : Wesley Hunt
  * @version : 1.0
 */

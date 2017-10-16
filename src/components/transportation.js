@@ -1,3 +1,9 @@
+/*
+ * @purpose : Transportation Input Component keeps track of the selected mode of transportation
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
+
 "use strict";
 
 import React from 'react';
@@ -24,7 +30,6 @@ class TransportationInput extends React.Component {
         for(let i = 0; i < tKeys.length; ++i){
             let isSelected = this.props.SelectedTransport == tKeys[i] ? "transportSelected" : "";
 
-            //let isSelected = _.indexOf(this.props.SelectedTransport, transportationNames[i]) != -1 ? "selected" : "";
             TransportationDivs.push(<div className={styles[isSelected]}onClick={(e)=> this.handleChange(tKeys[i])}>
                 <div>
                     <img src={this.props.TransportationData[tKeys[i]].src}/>

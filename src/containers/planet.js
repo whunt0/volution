@@ -72,7 +72,8 @@ function* DataSaga(){
 }
 
 function* FetchData(){
-    let url = 'http://localhost:3000/';
+    //let url = 'http://localhost:3000/';
+    let url = 'https://wt-2f57da0cad2e07a31bf654e42422bb7c-0.run.webtask.io/express/';
 
     try{
         let ssData = yield get(url + 'solarsystem', {}, true);

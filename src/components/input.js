@@ -1,3 +1,9 @@
+/*
+ * @purpose : Planet Input Components handle inputs by typing into the input fields.
+ * These values are ovewritten by clicking on a planet in the solar system image.
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
 "use strict";
 
 import React from 'react';
@@ -18,11 +24,11 @@ class PlanetInput extends React.Component {
         this.planetNames = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"];
 
     }
+
     handleChange(e){
-        //this.setState({text : event.target.value});
         this.props.setInputText(this.props.inputName, e.target.value);
-        console.log("Handling input change");
     }
+
     render(){
         let valid = true;
         let ErrorComponent = <div/>;
@@ -58,7 +64,6 @@ function* InputSaga(){
 
 function* SetInputsOnSelect(action){
     try{
-        //yield put({type : "SET_INPUT_TEXT", inputName : modSelect ? "leftInput" : "rightInput", text : action.selectedPlanets[0]});
         yield put({type : "SET_INPUT_TEXT", inputName : "leftInput", text : _.isUndefined(action.selectedPlanets[0]) ? "" : action.selectedPlanets[0]});
         yield put({type : "SET_INPUT_TEXT", inputName : "rightInput", text : _.isUndefined(action.selectedPlanets[1]) ? "" : action.selectedPlanets[1]});
         modSelect = (modSelect + 1) % 2;
