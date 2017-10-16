@@ -1,18 +1,15 @@
 /*
- * @purpose : Reducer entry point, all reducers will imported and combined.
+ * @purpose : Reducer entry point, all reducers will be imported and combined here.
  * @author : Wesley Hunt
  * @version : 1.0
 */
 'use strict';
 
+import { combineReducers } from "redux";
 import { SetTextReducer } from "./planet";
+import { PlanetClicker, PlanetInputs, SelectedTransport, PlanetData, TransportationData } from "./planet";
 
-function PlanetWidgetReducer(state, action) {
-    if(action.type == "@@INIT") return state;
-    return {
-        [state.PlanetWidget.PlanetInputs] : SetTextReducer(state.PlanetWidget.PlanetInputs, action)
-    };
-}
-    
-export { PlanetWidgetReducer };
+const PlanetWidget = combineReducers({PlanetClicker, PlanetInputs, SelectedTransport, PlanetData, TransportationData});
+const AppReducer = combineReducers({PlanetWidget});
 
+export { AppReducer };

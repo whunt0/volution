@@ -1,89 +1,87 @@
 "use strict";
 
 import React from 'react';
-import itemStyle from '../styles/item.css';
 import CO from 'co';
-import { get } from '../utils/REST';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import _ from 'lodash';
+import { get } from '../utils/REST';
+import { put, takeEvery } from 'redux-saga/effects';
+import { connect } from 'react-redux';
 import { store } from '../index';
+import { SET_INPUT_TEXT, SET_TRANSPORTATION } from '../actions/planet';
+import { Error } from '../utils/error';
 
-//store.getState();
-
-class ItemList extends React.Component {
-    RESTTest(){
-        console.log("Do we recompile?");
-        CO(function*(){
-            var ret = yield get('/REST/items');
-            console.log(ret);
-
-        });
-    }
-
-    render(){
-        return ( 
-            <div>
-                {this.props.inputName}<input type='text' name={this.props.inputName}></input>
-                <div className={itemStyle.myText} onClick={() => this.RESTTest()}>Test The Rest</div>
-            </div>
-        );
-    }
-}
-
-ItemList.propTypes = {
-    inputName : PropTypes.string
-};
 
 class PlanetInput extends React.Component {
-    //constructor(props){
-    //    super(props);
-    //    this.state = {text : ''};
-    //}
+    constructor(props){
+        super(props);
+        this.planetNames = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"];
+
+    }
     handleChange(e){
         //this.setState({text : event.target.value});
-        this.props.testme(this.props.inputName, e.target.value);
+        this.props.setInputText(this.props.inputName, e.target.value);
         console.log("Handling input change");
     }
     render(){
+        let valid = true;
+        let ErrorComponent = <div/>;
+        let inputText = this.props.PlanetInputs[this.props.inputName];
+        inputText = _.isUndefined(inputText) ? "" : inputText;
+
+        if(inputText.length != 0 && _.indexOf(this.planetNames, inputText.toLowerCase()) == -1){
+            valid = false;
+            ErrorComponent = <Error message='Invalid planet name.'/>;
+        }
+
         return ( 
             <div>
-                <input type='text' name={this.props.inputName} onChange={ (e) => this.handleChange(e) }/>
+                <input valid={valid} type='text' value={this.props.PlanetInputs[this.props.inputName]} name={this.props.inputName} onChange={ (e) => this.handleChange(e) }/>
+                { ErrorComponent }
             </div>
         );
     }
 }
 
 PlanetInput.propTypes = {
+    PlanetInputs : PropTypes.object,
     inputName : PropTypes.string,
     test : PropTypes.func,
-    testme : PropTypes.func
+    setInputText : PropTypes.func
 };
 
-function SetText(inputName, text){
-    return {
-        type : "SET_INPUT_TEXT",
-        inputName : inputName,
-        text : text
-    };
+var modSelect = 1;
+
+function* InputSaga(){
+    yield takeEvery("SET_SELECTED_PLANETS", SetInputsOnSelect) ;
+}
+
+function* SetInputsOnSelect(action){
+    try{
+        //yield put({type : "SET_INPUT_TEXT", inputName : modSelect ? "leftInput" : "rightInput", text : action.selectedPlanets[0]});
+        yield put({type : "SET_INPUT_TEXT", inputName : "leftInput", text : _.isUndefined(action.selectedPlanets[0]) ? "" : action.selectedPlanets[0]});
+        yield put({type : "SET_INPUT_TEXT", inputName : "rightInput", text : _.isUndefined(action.selectedPlanets[1]) ? "" : action.selectedPlanets[1]});
+        modSelect = (modSelect + 1) % 2;
+
+    } catch (err){
+        console.log("rest request failed");
+    }
 }
 
 
 const mapStateToProps = (state, props) => {
-    //return state;
-    //let newState = Object.assign({}, state);
-    //newState.PlanetInputs[props.inputName] = {text = props.text;
-    return { "PlanetInputs" : state.PlanetWidget.PlanetInputs };
+    return { 
+        "PlanetInputs" : state.PlanetWidget.PlanetInputs,
+    };
 
 };
 
-const mapDispatchToProp = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props) => {
     return {
-        "test" : (text) => dispatch({"type" : "TEST_DISPATCH"}),
-        "testme" : (inputName, text) => dispatch(SetText(inputName, text))
+        "setInputText" : (inputName, text) => dispatch(SET_INPUT_TEXT(inputName, text))
     };
 };
 
-const ConnectedPlanetInput = connect(mapStateToProps, mapDispatchToProp)(PlanetInput);
+const ConnectedPlanetInput = connect(mapStateToProps, mapDispatchToProps)(PlanetInput);
 
-export { ItemList, ConnectedPlanetInput};
+export { InputSaga, ConnectedPlanetInput};

@@ -1,0 +1,119 @@
+.planet
+    position : absolute
+    border-radius : 50%
+    z-index : 2
+
+.planet:hover
+        border : 2px solid red
+
+.selected
+        box-shadow: 0 0 0 2px blue
+
+.transportSelected
+        box-shadow: 0 0 0 2px blue
+        border-radius : 20px
+
+
+.planet.selected:hover
+        border : 2px solid red
+        box-shadow: 0 0 0 2px blue
+
+.Mercury
+    left : 186px
+    top : 228px
+    width : 8px
+    height : 8px
+    margin-left : -4px 
+    margin-top : -4px 
+
+.Venus
+    left : 221px
+    top : 228px
+    width : 16px
+    height : 16px
+    margin-left : -8px 
+    margin-top : -8px 
+
+.Earth
+    left :270px
+    top : 228px
+    width : 14px
+    height : 14px
+    margin-left : -7px 
+    margin-top : -7px 
+
+.Mars
+    left : 314px
+    top : 228px 
+    width : 8px
+    height : 8px
+    margin-left : -4px 
+    margin-top : -4px 
+
+.Jupiter
+    left :399px 
+    top : 228px
+    width : 104px
+    height : 104px
+    margin-left : -52px 
+    margin-top : -52px 
+
+.Saturn
+    left : 548px
+    top : 228px
+    width : 88px
+    height : 88px
+    margin-left : -44px 
+    margin-top : -44px 
+
+.Uranus
+    left :643px
+    top : 228px
+    width : 38px
+    height : 38px
+    margin-left : -19px 
+    margin-top : -19px 
+
+.Neptune
+    left : 706px
+    top : 228px
+    width : 38px
+    height : 38px
+    margin-left : -19px 
+    margin-top : -19px 
+
+.transportationWrapper
+    width : 400px
+    div
+        height : 50px
+        div
+            .selected
+                border-radius : 20px
+            padding : 5px
+            display : flex;
+            justify-content: center;
+            align-items : center;
+            float : left
+            width : calc(100% / 3)
+            img
+                height : 100%
+
+.ioMargin
+    input
+        width : 75%
+        padding : 5px
+        margin : 10px
+        border : 2px solid grey
+        border-radius : 4px
+        outline : none
+        &:hover
+            box-shadow: 0 0 0 2px blue
+    margin : auto
+    width : 200px
+    text-align : center
+
+.controlContainer
+    display : flex
+    margin-top : 10px
+    border-radius : 20px
+    background-color : rgb(45, 250, 255)

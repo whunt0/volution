@@ -1,0 +1,17 @@
+    //componentDidMount(){
+    //    _.each(this.state.SelectedPlanets, (planetName) =>{
+    //        
+
+    //    })
+        
+
+    }
+    //<div className={[styles.planet, styles.Mercury].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Venus].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Earth].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Mars].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Jupiter].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Saturn].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Uranus].join(" ")} onClick={() => this.setPlanetInput()}/>
+    //<div className={[styles.planet, styles.Neptune].join(" ")} onClick={() => this.setPlanetInput()}/>
+

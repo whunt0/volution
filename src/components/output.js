@@ -1,11 +1,4 @@
-/*
- * @purpose : Planet container used to wrap inputs and outputs.
- * Takes care of input/ouput logic
- * @author : Wesley Hunt
- * @version : 1.0
-*/
-
-"use strict";
+console.log("ENTERING CONTAINER/PLANET");
 
 import React from 'react';
 import CO from "co";
@@ -24,7 +17,7 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-class PlanetContainer extends React.Component{
+class PlanetOutput extends React.Component{
     constructor(props){
         super(props);
         //Keep selected planets inside the planet container, doesn't need to persist in the store.
@@ -53,37 +46,25 @@ class PlanetContainer extends React.Component{
         }
 
         return (
-            <div className={'layout'} style={{width:'800px'}}>
-                {this.props.children}
+            <div>
+                <div>
+                    Hours : {Hours.toLocaleString()}
+                </div>
+                <div>
+                    Days : {Days.toLocaleString()}
+                </div>
+                <div>
+                    Years : {Years.toLocaleString()}
+                </div>
             </div>
         );
     }
 }
 
-
-PlanetContainer.propTypes = {
-    children : PropTypes.node,
+PlanetOutput.propTypes = {
     PlanetWidget : PropTypes.object
 };
 
-
-function* DataSaga(){
-    yield takeEvery("FETCH_DATA", FetchData) ;
-}
-
-function* FetchData(){
-    let url = 'http://localhost:3000/';
-
-    try{
-        let ssData = yield get(url + 'solarsystem', {}, true);
-        let tData = yield get(url + 'transportation', {}, true);
-        yield put({type : "SET_PLANET_DATA", data : ssData});
-        yield put({type : "SET_TRANSPORTATION_DATA", data : tData});
-    } catch (err){
-        console.log("rest request failed");
-    }
-
-}
 
 const mapStateToProps = (state, props) => {
     return { 
@@ -92,6 +73,7 @@ const mapStateToProps = (state, props) => {
 
 };
 
-const ConnectedPlanetContainer = connect(mapStateToProps)(PlanetContainer);
+const ConnectedPlanetOutput = connect(mapStateToProps)(PlanetOutput);
 
-export { ConnectedPlanetContainer, DataSaga };
+
+export { ConnectedPlanetOutput };

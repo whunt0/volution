@@ -1,44 +1,47 @@
+/*
+ * @purpose : Application  entry, setup store, run sagas
+ * @author : Wesley Hunt
+ * @version : 1.0
+*/
+
 "use strict";
 
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import App from './App';
-import { PlanetWidgetReducer }  from './reducers/planet';
-import { combinedWidgetReducer }  from './reducers/planet';
+import { AppReducer }  from './reducers/index';
+import createSagaMiddleware from 'redux-saga';
+import { FETCH_DATA, FETCH_PLANET_DATA, FETCH_TRANSPORTATION_DATA } from './actions/planet';
 
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { App } from './App';
+import { DataSaga } from './containers/planet';
+import { InputSaga } from './components/input';
 
-//function setInput(previousState, action){
-//    if(action.type == "setInputText")
-//        return Object.assign(previousState, action.text);
-//    return previousState;
-//}
-
-let storeDefaults = {
-    PlanetWidget : {
-        PlanetInputs : {},
-        SelectedTransport : null,
-        //Data : {
-        //    Planet : {},
-        //    Transport : {}
-        //}
-    }
+//Get page 
+document.onmousemove = function(e){
+    var x = e.pageX;
+    var y = e.pageY;
+    e.target.title = "X is " + x + " and Y is " + y;
 };
 
+const sagaMiddleware = createSagaMiddleware();
 
 let store = createStore(
-    //PlanetWidgetReducer, 
-    combinedWidgetReducer,
-    storeDefaults,
+    AppReducer,
+    //storeDefaults,
     compose(
-        applyMiddleware(thunk),
+        applyMiddleware(sagaMiddleware),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
+
+sagaMiddleware.run(DataSaga);
+sagaMiddleware.run(InputSaga);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -49,5 +52,10 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+store.dispatch(FETCH_DATA());
 
-export { store };
+function runSaga(saga){
+    sagaMiddleware.run(saga);
+}
+
+export { store, runSaga };

@@ -1,0 +1,15 @@
+* {
+    box-sizing : border-box;
+}
+
+:global .layout {
+    float : left;
+}
+
+:global .floatContainer {
+    overflow : hidden
+}
+
+:global img {
+    display : block;
+}

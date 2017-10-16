@@ -31,7 +31,7 @@ module.exports = {
                     presets : ['react']
                 }
             },
-            //Lint all Javascript files
+            //Lint Javascript files
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -42,15 +42,37 @@ module.exports = {
                 test: /\.json$/, 
                 loader: 'json-loader'
             },
-            //Compile sass
-            {
-                test: /\.sass$/,
-                loader: 'css-loader!resolve-url!sass-loader?sourceMap'
-            },
             //Load CSS
             {
                 test: /\.css$/,
-                loaders: ['style-loader', 'css-loader']
+                use: [
+                   'style-loader',
+                   {
+                       loader: 'css-loader',
+                       options: {
+                           modules: true,
+                           localIdentName: '[name]__[local]___[hash:base64:5]'
+                       }
+                   }
+                ]
+
+            },
+
+            //Compile stylus 
+            {
+                test: /\.styl$/,
+                use: [
+                   'style-loader',
+                   {
+                       loader: 'css-loader',
+                       options: {
+                           modules: true,
+                           localIdentName: '[name]__[local]___[hash:base64:5]'
+                       }
+
+                   },
+                   'stylus-loader'
+                ] 
             },
             //Load static resources
             {
