@@ -1,5 +1,3 @@
-# mern-starter-kit-client
-# AffiniPay
 # Make sure you have node & NPM installed (https://nodejs.org/en/download/)
 ## Clone the repository
 ### git clone https://github.com/whunt0/volution.git
