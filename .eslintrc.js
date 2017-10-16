@@ -22,10 +22,10 @@ module.exports = {
             "error",
             4
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        //"linebreak-style": [
+        //    "error",
+        //    "unix"
+        //],
         "no-console" : "off",
         "no-unused-vars" : "off",
         //"quotes": [
